@@ -12,4 +12,4 @@ async function makeRequest() {
 
 setInterval(makeRequest, 180000); // 180000 milliseconds = 180 seconds
 
-export default makeRequest;
+export { makeRequest };
