@@ -1,5 +1,7 @@
 // import fetch from 'node-fetch';
 
+let isRunning = false;
+
 function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -10,6 +12,9 @@ function getCurrentTime() {
 }
 
 async function makeRequest() {
+  if (isRunning) return;
+  isRunning = true;
+
   console.log(`[${getCurrentTime()}] Starting makeRequest`);
 
   try {
@@ -27,7 +32,8 @@ async function makeRequest() {
   await delay(180000); 
 
   console.log(`[${getCurrentTime()}] Delay completed, making next request`);
-  
+
+  isRunning = false;
   makeRequest();
 }
 
