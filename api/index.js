@@ -1,19 +1,25 @@
-import fetch from 'node-fetch';
+// import fetch from 'node-fetch';
 
 async function makeRequest() {
   try {
-    console.log('Making request to https://webhook-x19y.onrender.com/api/poll');
-    //const response = await fetch('https://webhook-x19y.onrender.com/api/poll');
-    const data = await response.text();
-    console.log('Response received:', data);
+    console.log('Simulated request to https://webhook-x19y.onrender.com/api/poll');
+    // const response = await fetch('https://webhook-x19y.onrender.com/api/poll');
+    // const data = await response.text();
+    // console.log('Response received:', data);
   } catch (error) {
-    console.log('Request error:', error.message);
+    console.log('Simulated request error:', error.message);
   }
+
+  // Vakio viive 180000 millisekuntia (180 sekuntia)
+  console.log(`Next request in 180 seconds`);
+
+  // Ajastetaan seuraava pyyntö viiveen jälkeen
+  setTimeout(makeRequest, 180000);
 }
 
-setInterval(makeRequest, 180000); // 180000 milliseconds = 180 seconds
+// Aloitetaan cron-tehtävä
+makeRequest();
 
-// Jotta Vercel ei lopeta prosessia liian aikaisin, pidetään sovellus aktiivisena.
-console.log('Cron job is running');
+console.log('Cron job started');
 
 export default makeRequest;
