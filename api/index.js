@@ -1,7 +1,7 @@
 const http = require('http');
 
 function makeRequest() {
-  http.get('http://your-url-here.com', (resp) => {
+  http.get('https://webhook-x19y.onrender.com/api/poll', (resp) => {
     let data = '';
 
     resp.on('data', (chunk) => {
