@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
+import express from 'express';
 
 const PORT = process.env.PORT || 3000;
-const express = require('express');
 const app = express();
 
 function delay(ms) {
