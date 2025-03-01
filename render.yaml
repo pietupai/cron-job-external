@@ -1,5 +1,5 @@
 services:
-  - type: web
+  - type: worker
     name: cron-job-external
     env: node
     buildCommand: "npm install"
