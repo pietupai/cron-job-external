@@ -10,6 +10,8 @@ function getCurrentTime() {
 }
 
 async function makeRequest() {
+  console.log(`[${getCurrentTime()}] Starting makeRequest`);
+
   try {
     console.log(`[${getCurrentTime()}] Simulated request to https://webhook-x19y.onrender.com/api/poll`);
     // const response = await fetch('https://webhook-x19y.onrender.com/api/poll');
@@ -18,21 +20,19 @@ async function makeRequest() {
   } catch (error) {
     console.log(`[${getCurrentTime()}] Simulated request error:`, error.message);
   }
+
+  console.log(`[${getCurrentTime()}] Next request in 180 seconds`);
+
+  // Viive 180000 millisekuntia (180 sekuntia) ennen seuraavaa pyyntöä
+  await delay(180000); 
+
+  console.log(`[${getCurrentTime()}] Delay completed, making next request`);
+  
+  makeRequest();
 }
 
-function startCronJob() {
-  setTimeout(async function executeRequest() {
-    console.log(`[${getCurrentTime()}] Starting makeRequest`);
-    await makeRequest();
-    console.log(`[${getCurrentTime()}] Request completed. Next request in 180 seconds`);
-
-    // Ajastetaan seuraava pyyntö 180 sekunnin jälkeen
-    setTimeout(executeRequest, 180000);
-  }, 180000);
-}
-
-// Aloitetaan cron-tehtävä
+// Aloitetaan cron-tehtävä kerran
 console.log(`[${getCurrentTime()}] Cron job started`);
-startCronJob();
+makeRequest();
 
 export default makeRequest;
