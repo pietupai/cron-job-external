@@ -1,0 +1,22 @@
+const http = require('http');
+
+function makeRequest() {
+  http.get('http://your-url-here.com', (resp) => {
+    let data = '';
+
+    resp.on('data', (chunk) => {
+      data += chunk;
+    });
+
+    resp.on('end', () => {
+      console.log(data);
+    });
+
+  }).on('error', (err) => {
+    console.log('Error: ' + err.message);
+  });
+}
+
+setInterval(makeRequest, 10000); // 10000 milliseconds = 10 seconds
+
+module.exports = makeRequest;
