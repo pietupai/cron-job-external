@@ -1,0 +1,52 @@
+const fetch = require('node-fetch');
+
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function getCurrentTime() {
+  const now = new Date();
+  return now.toTimeString().split(' ')[0]; // Aikaleima muodossa hh:mm:ss
+}
+
+async function sendRequest(url) {
+  console.log(`[${getCurrentTime()}] Starting request to ${url}`);
+
+  try {
+    console.log(`[${getCurrentTime()}] Making request to ${url}`);
+    const response = await fetch(url);
+    const data = await response.text();
+    console.log(`[${getCurrentTime()}] Response from ${url}:`, data);
+  } catch (error) {
+    console.log(`[${getCurrentTime()}] Error making request to ${url}:`, error.message);
+  }
+}
+
+async function startScheduler() {
+  const urls = [
+    'https://webhook-x19y.onrender.com/api/poll1',
+    'https://webhook-x19y.onrender.com/api/poll2',
+    // Lisää muut GET-osoitteet tähän
+  ];
+
+  for (const url of urls) {
+    sendRequest(url);
+    await delay(10000); // 10 sekunnin viive saman osoitteen välillä
+  }
+}
+
+async function scheduleSameUrl(url) {
+  while (true) {
+    await sendRequest(url);
+    await delay(10000); // 10 sekunnin viive saman osoitteen välillä
+  }
+}
+
+// Esimerkki, jossa ajastetaan useita eri osoitteita
+startScheduler();
+
+// Esimerkki, jossa ajastetaan saman osoitteen pyyntöjä
+// scheduleSameUrl('https://webhook-x19y.onrender.com/api/poll1');
+// scheduleSameUrl('https://webhook-x19y.onrender.com/api/poll2');
+
+console.log('Scheduler started');
