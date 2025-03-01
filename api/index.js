@@ -3,9 +3,10 @@ import http from 'http';
 
 async function makeRequest() {
   try {
+    console.log('Making request to https://webhook-x19y.onrender.com/api/poll');
     const response = await fetch('https://webhook-x19y.onrender.com/api/poll');
     const data = await response.text();
-    console.log(data);
+    console.log('Response:', data);
   } catch (error) {
     console.log('Error:', error.message);
   }
