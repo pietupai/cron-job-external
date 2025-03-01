@@ -17,6 +17,6 @@ function makeRequest() {
   });
 }
 
-setInterval(makeRequest, 10000); // 10000 milliseconds = 10 seconds
+setInterval(makeRequest, 180000); // 10000 milliseconds = 10 seconds
 
 module.exports = makeRequest;
