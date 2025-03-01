@@ -1,4 +1,5 @@
 import fetch from 'node-fetch';
+import http from 'http';
 
 async function makeRequest() {
   try {
@@ -12,4 +13,10 @@ async function makeRequest() {
 
 setInterval(makeRequest, 180000); // 180000 milliseconds = 180 seconds
 
-export { makeRequest };
+// Luodaan HTTP-palvelin, jotta Vercel hyväksyy deployn
+const server = http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('Cron job is running\n');
+});
+
+export default server;
