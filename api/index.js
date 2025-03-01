@@ -1,5 +1,7 @@
 // import fetch from 'node-fetch';
 
+let isRunning = false;
+
 function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -10,6 +12,9 @@ function getCurrentTime() {
 }
 
 async function makeRequest() {
+  if (isRunning) return;
+  isRunning = true;
+
   console.log(`[${getCurrentTime()}] Starting makeRequest`);
 
   try {
@@ -20,20 +25,20 @@ async function makeRequest() {
   } catch (error) {
     console.log(`[${getCurrentTime()}] Simulated request error:`, error.message);
   }
+
+  console.log(`[${getCurrentTime()}] Next request in 10 seconds`);
+
+  // Viive 10000 millisekuntia (10 sekuntia) ennen seuraavaa pyyntöä
+  await delay(10000); 
+
+  console.log(`[${getCurrentTime()}] Delay completed, making next request`);
+
+  isRunning = false;
+  makeRequest();
 }
 
-function startCronJob() {
-  setTimeout(async function executeRequest() {
-    await makeRequest();
-    console.log(`[${getCurrentTime()}] Request completed. Next request in 10 seconds`);
-
-    // Ajastetaan seuraava pyyntö 10 sekunnin jälkeen
-    startCronJob();
-  }, 10000);
-}
-
-// Aloitetaan cron-tehtävä
+// Aloitetaan cron-tehtävä kerran
 console.log(`[${getCurrentTime()}] Cron job started`);
-startCronJob();
+makeRequest();
 
 export default makeRequest;
