@@ -1,13 +1,13 @@
 {
   "name": "cron-job-external",
-  "type": "module",
   "version": "1.0.0",
-  "description": "",
-  "main": "api/index.js",
+  "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node api/index.js"
   },
   "dependencies": {
-    "node-fetch": "^3.0.0"
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.1"
   }
 }
