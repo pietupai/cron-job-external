@@ -1,8 +1,7 @@
-const fetch = require('node-fetch');
-
 async function makeRequest() {
   try {
-    const response = await fetch('https://webhook-x19y.onrender.com/api/poll');
+    const fetch = await import('node-fetch');
+    const response = await fetch.default('https://webhook-x19y.onrender.com/api/poll');
     const data = await response.text();
     console.log(data);
   } catch (error) {
