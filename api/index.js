@@ -1,5 +1,4 @@
 import fetch from 'node-fetch';
-import http from 'http';
 
 async function makeRequest() {
   try {
@@ -14,15 +13,7 @@ async function makeRequest() {
 
 setInterval(makeRequest, 180000); // 180000 milliseconds = 180 seconds
 
-// Luodaan HTTP-palvelin, jotta Vercel hyväksyy deployn
-const server = http.createServer((req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/plain' });
-  res.end('Cron job is running\n');
-  console.log('HTTP server received a request');
-});
+// Jotta Vercel ei lopeta prosessia liian aikaisin, pidetään sovellus aktiivisena.
+console.log('Cron job is running');
 
-server.listen(3000, () => {
-  console.log('HTTP server is listening on port 3000');
-});
-
-export default server;
+export default makeRequest;
