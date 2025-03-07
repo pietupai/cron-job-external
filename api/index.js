@@ -37,10 +37,8 @@ async function makeRequest() {
 
 app.get('/api', (req, res) => {
   console.log('Get /api');
-  res.write('Ok\n');
-  req.on('close', () => {
-    console.log('Get connection closed');
-  });
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('Ok\n');
 });
 
 // Käynnistetään Express-palvelin
