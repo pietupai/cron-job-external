@@ -25,9 +25,9 @@ async function makeRequest() {
     console.log(`[${getCurrentTime()}] Request error:`, error.message);
   }
 
-  console.log(`[${getCurrentTime()}] Next request in 180 seconds`);
+  console.log(`[${getCurrentTime()}] Next request in 300 seconds`);
 
-  // Viive 180000 millisekuntia (300 sekuntia) ennen seuraavaa pyyntöä
+  // Viive 300000 millisekuntia (300 sekuntia) ennen seuraavaa pyyntöä
   await delay(300000);
 
   console.log(`[${getCurrentTime()}] Delay completed, making next request`);
