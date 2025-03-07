@@ -38,6 +38,8 @@ async function makeRequest() {
 app.get('/api', (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  res.setHeader('Cache-Control', 'no-cache');
+  res.flush();
   console.log('Get /api');
   res.writeHead(200, { 'Content-Type': 'text/plain' });
   res.end('Ok\n');
