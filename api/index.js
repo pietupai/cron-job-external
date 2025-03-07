@@ -35,6 +35,14 @@ async function makeRequest() {
   makeRequest();
 }
 
+app.get('/api', (req, res) => {
+  console.log('Get /api');
+  res.write('Ok\n');
+  req.on('close', () => {
+    console.log('Get connection closed');
+  });
+});
+
 // Käynnistetään Express-palvelin
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
